@@ -1,8 +1,8 @@
 <?php
     $album_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
     
-    // 1. 查詢 Album 基本資料 
-    // ★關鍵：JOIN media 以取得封面的路徑 (cover_path)
+    // 查詢 Album 基本資料 
+    // JOIN media 以取得封面的路徑 (cover_path)
     $sql = "SELECT album.*, user.username, media.path AS cover_path 
             FROM album 
             LEFT JOIN user ON album.user_id = user.id 
@@ -17,7 +17,7 @@
         exit();
     }
 
-    // 2. 查詢相簿內的所有照片
+    // 查詢相簿內的所有照片
     $photos_sql = "SELECT m.* FROM media m 
                    JOIN album_media am ON m.id = am.media_id 
                    WHERE am.album_id = '$album_id' 

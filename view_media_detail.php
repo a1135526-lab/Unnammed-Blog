@@ -22,12 +22,12 @@
     $is_liked = false;
     $total_likes = 0;
 
-    // 1. 查總數
+    // 查總數
     $like_count_sql = "SELECT COUNT(*) as total FROM likes WHERE target_type = 'media' AND target_id = '$media_id'";
     $lc_result = mysqli_query($link, $like_count_sql);
     $total_likes = mysqli_fetch_assoc($lc_result)['total'];
 
-    // 2. 查自己有無按過 (如果有登入)
+    // 查自己有無按過
     if (isset($_SESSION['user_id'])) {
         $my_uid = $_SESSION['user_id'];
         $check_like = "SELECT id FROM likes WHERE user_id = '$my_uid' AND target_type = 'media' AND target_id = '$media_id'";

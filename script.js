@@ -1,5 +1,3 @@
-/* script.js */
-
 // 深色模式切換
 function toggleTheme() {
     const body = document.body;
@@ -28,14 +26,10 @@ function addInformation(show){
     }
 }
 
-/* script.js */
-
 // 按讚功能 (AJAX)
 function toggleLike(type, id, btnElement) {
-    // 1. Debug 用：確認函式有被呼叫
-    console.log("正在按讚:", type, id);
 
-    // 2. 發送請求給後端
+    // 發送請求給後端
     fetch('api_like.php', {
         method: 'POST',
         headers: {
@@ -63,13 +57,13 @@ function toggleLike(type, id, btnElement) {
                 btnElement.classList.remove('liked');
             }
             
-            // 4. 更新數字
+            // 更新數字
             const countSpan = btnElement.querySelector('.like-count');
             if (countSpan) {
                 countSpan.innerText = data.count;
             }
         } else {
-            // 如果後端回傳失敗 (例如沒登入)
+            // 如果後端回傳失敗 (沒登入)
             alert(data.message);
             if(data.message === '請先登入') {
                 location.href = 'index.php?page=login';

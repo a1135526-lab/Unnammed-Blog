@@ -1,5 +1,4 @@
 <?php
-// create_album.php
 session_start();
 require_once 'db.php';
 
@@ -24,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("<script>alert('請至少選擇一張圖片'); history.back();</script>");
     }
 
-    // ★ 關鍵：如果沒選封面，預設用第一張圖當封面
+    // 如果沒選封面，預設用第一張圖當封面
     if ($cover_id == 0 && count($media_ids) > 0) {
         $cover_id = intval($media_ids[0]);
     }
 
-    // ★ 關鍵：如果選了封面但沒勾選，後端幫忙補進去
+    // 如果選了封面但沒勾選，後端幫忙補進去
     if ($cover_id > 0 && !in_array($cover_id, $media_ids)) {
         $media_ids[] = $cover_id;
     }

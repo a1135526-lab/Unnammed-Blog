@@ -1,11 +1,8 @@
 <?php
-// index.php
-session_start(); // ★★★ 必須放在第一行 ★★★
+session_start(); 
 include('db.php') ;
 
-// --- Auth 邏輯處理區 ---
-
-// 1. 處理註冊提交
+//處理註冊提交
 if (isset($_GET['action']) && $_GET['action'] == 'register_submit') {
     $username = mysqli_real_escape_string($link, $_POST['username']);
     $email = mysqli_real_escape_string($link, $_POST['email']);
@@ -18,7 +15,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'register_submit') {
         exit();
     }
 
-    // 密碼加密 (安全性)
+    // 密碼加密 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     // 插入資料庫 (預設給個假圖當大頭貼)
@@ -32,7 +29,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'register_submit') {
     exit();
 }
 
-// 2. 處理登入提交
+// 處理登入提交
 if (isset($_GET['action']) && $_GET['action'] == 'login_submit') {
     $username = mysqli_real_escape_string($link, $_POST['username']);
     $password = $_POST['password'];
@@ -43,7 +40,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'login_submit') {
 
     // 驗證帳號存在 且 密碼正確
     if ($user && password_verify($password, $user['password'])) {
-        // ★★★ 登入成功，設定 Session ★★★
+        //登入成功，設定 Session
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['avatar'] = $user['avatar']; // 存一下頭像路徑方便顯示
@@ -55,16 +52,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'login_submit') {
     exit();
 }
 
-// 3. 處理登出
+// 處理登出
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     session_destroy();
     echo "<script>alert('已登出'); location.href='index.php?page=login';</script>";
     exit();
 }
 
-// --- 其他原有邏輯 (留言/新增聯絡人) ---
-
-// 4. 處理留言 (修正為使用當前登入者 ID)
+// 處理留言
 if (isset($_GET['comment-contents']) && !empty($_GET['comment-contents'])) {
     if (!isset($_SESSION['user_id'])) {
         echo "<script>alert('請先登入才能留言！'); location.href='index.php?page=login';</script>";

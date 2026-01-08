@@ -1,14 +1,13 @@
 <?php
-// update_avatar.php
 session_start();
 require_once 'db.php';
 
-// 1. 檢查登入
+// 檢查登入
 if (!isset($_SESSION['user_id'])) {
     die("<script>alert('請先登入'); location.href='index.php?page=login';</script>");
 }
 
-// 2. 檢查是否有檔案上傳
+// 檢查是否有檔案上傳
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['avatar_file'])) {
     
     $user_id = $_SESSION['user_id'];
@@ -39,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['avatar_file'])) {
     // 移動檔案
     if (move_uploaded_file($file['tmp_name'], $target_path)) {
         
-        // 3. 更新資料庫
+        // 更新資料庫
         $sql = "UPDATE user SET avatar = '$target_path' WHERE id = '$user_id'";
         
         if (mysqli_query($link, $sql)) {
-            // ★ 重要：更新 Session 中的大頭貼，這樣 Header 的頭貼才會同步更新
+            // 更新 Session 中的大頭貼，這樣 Header 的頭貼才會同步更新
             $_SESSION['avatar'] = $target_path;
             
             echo "<script>alert('大頭貼更新成功！'); location.href='index.php?page=profile';</script>";

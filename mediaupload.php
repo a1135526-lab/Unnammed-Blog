@@ -1,6 +1,5 @@
 <?php
-// mediaupload.php
-session_start(); // ★ 記得開啟 Session
+session_start(); 
 require_once 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_file'])) {
         die("上傳失敗，錯誤代碼：" . $file['error']);
     }
 
-    // 檢查檔案類型 (安全性)
+    // 檢查檔案類型
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!in_array($file['type'], $allowed_types)) {
         die("只允許上傳圖片 (JPG, PNG, GIF, WEBP)");

@@ -1,5 +1,4 @@
 <?php
-// get_media_api.php
 header('Content-Type: application/json');
 require_once 'db.php';
 
@@ -11,7 +10,7 @@ if (!isset($_GET['id'])) {
 $id = mysqli_real_escape_string($link, $_GET['id']);
 
 // 1. 獲取 Media 基本資料 (包含路徑、時間、作者ID)
-// 我們同時 JOIN user 資料表來取得作者名字
+// JOIN user 資料表來取得作者名字
 $query = "SELECT media.*, user.username as author_name 
           FROM media 
           LEFT JOIN user ON media.user_id = user.id 
@@ -25,7 +24,7 @@ if (!$media) {
     exit();
 }
 
-// 2. 獲取留言 (這裡假設你用的是新的 comment 表結構)
+// 2. 獲取留言
 $comments = [];
 $query_comments = "SELECT c.content, u.username 
                    FROM comment c
@@ -48,7 +47,7 @@ $response = [
     'description' => $media['description'],
     'author' => $media['author_name'] ? $media['author_name'] : 'Unknown',
     'created_at' => substr($media['created_at'], 0, 10), // 只取日期部分
-    'location' => $media['path'], // 資料庫欄位現在叫 path
+    'location' => $media['path'], 
     'comments' => $comments
 ];
 

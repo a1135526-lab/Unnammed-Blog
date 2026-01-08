@@ -1,8 +1,8 @@
 <section id="home" class="page active" style="display:block;">
     <div class="grid-container">
         <?php
-            // --- Album 區塊 ---
-            // ★ 修改 SQL：同時撈出封面圖路徑 (cover_path)
+            //  Album 區塊       
+            //  同時撈出封面圖路徑 (cover_path)
             $sql_query = "SELECT album.*, media.path AS cover_path 
                           FROM album 
                           LEFT JOIN media ON album.cover_media_id = media.id 
@@ -34,7 +34,7 @@
         ?>
 
         <?php
-            // --- Media 區塊 (保持不變) ---
+            // Media 區塊
             $sql_query = "SELECT * FROM media ORDER BY created_at DESC";
             $result = mysqli_query($link, $sql_query);
 

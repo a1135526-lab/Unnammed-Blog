@@ -464,11 +464,11 @@ textarea.form-control {
         max-height: 400px; /* 避免資訊太長，設個上限 */
     }
 
-    /* ★ 3. 留言區修正：強制顯示並設定高度 ★ */
+    /* 3. 留言區修正：強制顯示並設定高度 */
     .detail-comments {
         width: 100%;
         border-left: none;
-        height: 500px !important; /* ★強制設定高度，確保不會消失 */
+        height: 500px !important; /* 強制設定高度，確保不會消失 */
         display: flex;
         flex-direction: column;
         background: var(--bg-color); /* 確保背景色，避免混淆 */
@@ -623,7 +623,7 @@ textarea.form-control {
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
     color: rgba(255, 255, 255, 0.3);
-    border-radius: 50%; /* 圓形比較好看 */
+    border-radius: 50%;
     border: 2px solid white;
     font-size: 16px;
     transition: all 0.2s;
@@ -663,7 +663,7 @@ textarea.form-control {
     content: "★ ";
 }
 
-/* 當 checkbox 被選取時的樣式 (CSS Magic) */
+/* 當 checkbox 被選取時的樣式 */
 .media-checkbox-item input:checked + .media-thumb {
     border-color: var(--accent-color);
 }

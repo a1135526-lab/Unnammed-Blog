@@ -18,7 +18,7 @@
     // 撈取聯絡資訊
     $contact_result = mysqli_query($link, "SELECT * FROM user_contact WHERE user_id = '$user_id'");
 
-    // 統計資料 (模擬)
+    // 統計資料
     $fans_count = 99; 
     $likes_count = 0;
 ?>
@@ -117,7 +117,7 @@
     }
     .edit-icon-btn:hover { background: #eee; color: #4a90e2; }
 
-    /* --- 大頭貼更換樣式 --- */
+    /* 大頭貼更換 */
     .avatar-wrapper {
         position: relative;
         width: 150px; height: 150px;
@@ -148,7 +148,6 @@
     .avatar-wrapper:hover .avatar-overlay {
         opacity: 1;
     }
-    /* ------------------- */
 
     @media (max-width: 768px) {
         .profile-layout { flex-direction: column; }

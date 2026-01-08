@@ -97,7 +97,6 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; animation: fadeIn 0.3s; }
 
-    /* 上傳佈局 - 支援 RWD */
     .create-layout { display: flex; gap: 30px; }
     
     .upload-box { 
@@ -112,7 +111,7 @@
 
     .form-box { flex: 1; display: flex; flex-direction: column; gap: 15px; }
 
-    /* 照片網格 */
+    /* 照片grid */
     .photo-grid {
         display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         gap: 10px; max-height: 500px; overflow-y: auto; padding: 10px;
@@ -150,7 +149,7 @@
     .selection-guide { background: #eef; padding: 10px; border-radius: 5px; margin: 10px 0; font-size: 0.9rem; color: #555; }
     .empty-state { text-align: center; padding: 30px; background: #eee; border-radius: 10px; color: #777; }
 
-    /* ★★★ RWD 修正 ★★★ */
+    /*RWD*/
     @media (max-width: 768px) {
         .create-layout { flex-direction: column; gap: 20px; }
         .upload-box { height: 220px; }
@@ -158,7 +157,7 @@
 </style>
 
 <script>
-// 1. 圖片預覽功能 (新增)
+//圖片預覽功能
 function previewImage(input) {
     const placeholder = document.getElementById('upload-placeholder');
     const preview = document.getElementById('image-preview');
@@ -180,7 +179,7 @@ function previewImage(input) {
         // 如果取消選取，恢復原狀
         preview.src = '';
         preview.style.display = 'none';
-        placeholder.style.display = 'flex'; // 因為原本是有用了 flex center
+        placeholder.style.display = 'flex'; // 因為原本是有用了 flex:center
     }
 }
 
@@ -195,7 +194,7 @@ function switchTab(tabId) {
     else btns[1].classList.add('active');
 }
 
-// 相簿勾選邏輯
+// 相簿勾選
 function toggleCheckbox(id, event) {
     if(event.target.tagName === 'INPUT' || event.target.tagName === 'LABEL') return;
     const checkbox = document.getElementById('chk_' + id);
