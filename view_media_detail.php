@@ -59,15 +59,10 @@
             <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px; align-items: flex-end;">
                 <button 
                     onclick="toggleLike('media', <?php echo $media['id']; ?>, this)" 
-                    class="comment-button" 
-                    style="font-size: 2rem; border: none; background: none; cursor: pointer; color: <?php echo $is_liked ? '#ff5252' : '#ccc'; ?>;">
+                    class="comment-button <?php echo $is_liked ? 'liked' : ''; ?>">
                     
-                    ❤ 
-                    
-                    <span class="like-count" style="font-size: 1.2rem; vertical-align: middle; color: #333;">
-                        <?php echo $total_likes; ?>
-                    </span>
-                
+                    ❤ <span class="like-count" style="font-size: 1.2rem; vertical-align: middle;"><?php echo $total_likes; ?></span>
+
                 </button>
             </div>
         </div>

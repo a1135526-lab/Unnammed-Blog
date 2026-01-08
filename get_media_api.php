@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
 
 $id = mysqli_real_escape_string($link, $_GET['id']);
 
-// 1. 獲取 Media 基本資料 (包含路徑、時間、作者ID)
+// 獲取 Media 基本資料 (包含路徑、時間、作者ID)
 // JOIN user 資料表來取得作者名字
 $query = "SELECT media.*, user.username as author_name 
           FROM media 
@@ -24,7 +24,7 @@ if (!$media) {
     exit();
 }
 
-// 2. 獲取留言
+// 獲取留言
 $comments = [];
 $query_comments = "SELECT c.content, u.username 
                    FROM comment c
@@ -40,7 +40,7 @@ while($row_c = mysqli_fetch_array($result_comments)){
     ];
 }
 
-// 3. 組合回傳資料
+// 組合回傳資料
 $response = [
     'id' => $media['id'],
     'title' => $media['title'],

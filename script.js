@@ -28,32 +28,21 @@ function addInformation(show){
 
 // 按讚功能 (AJAX)
 function toggleLike(type, id, btnElement) {
+    // 防止重複點擊 (可選)
+    btnElement.style.pointerEvents = 'none';
 
-    // 發送請求給後端
     fetch('api_like.php', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: type, id: id })
     })
-    .then(response => {
-        // 檢查 API 是否有回傳 200 OK
-        if (!response.ok) {
-            throw new Error("HTTP error " + response.status);
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-        console.log("後端回傳:", data); // Debug 用：看後端回傳什麼
-
         if (data.success) {
-            // 3. 更新愛心顏色與樣式
+            // ★ 修改重點：只切換 class，不手動改顏色
             if (data.action === 'liked') {
-                btnElement.style.color = '#ff5252'; // 紅色
                 btnElement.classList.add('liked');
             } else {
-                btnElement.style.color = '#ccc'; // 灰色
                 btnElement.classList.remove('liked');
             }
             
@@ -63,15 +52,15 @@ function toggleLike(type, id, btnElement) {
                 countSpan.innerText = data.count;
             }
         } else {
-            // 如果後端回傳失敗 (沒登入)
             alert(data.message);
             if(data.message === '請先登入') {
                 location.href = 'index.php?page=login';
             }
         }
     })
-    .catch(error => {
-        console.error('發生錯誤:', error);
-        alert("系統發生錯誤，請檢查 Console");
+    .catch(error => console.error('Error:', error))
+    .finally(() => {
+        // 恢復點擊
+        btnElement.style.pointerEvents = 'auto';
     });
 }

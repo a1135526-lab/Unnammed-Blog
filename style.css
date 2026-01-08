@@ -294,10 +294,30 @@ header {
 }
 
 .comment-button {
-    border-style: none;
+    /* border-style: none;
+    cursor: pointer; */
+    background: none;
+    border: none;
     cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    color: #ccc; /* 預設灰色 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+/* here */
+.comment-button:hover {
+    transform: scale(1.1);
 }
 
+.comment-button.liked {
+    color: #ff5252 !important; /* 使用 !important 確保不被其他樣式覆蓋 */
+}
+
+.comment-button.liked .like-count {
+    color: #ff5252 !important;
+}
+/* hereend */
 .comment-avatar {
     width: 30px;
     height: 30px;
@@ -432,7 +452,7 @@ textarea.form-control {
 
 /* --- RWD 響應式修正  --- */
 @media (max-width: 768px) {
-    /* 1. 容器改為單欄，並取消固定高度 */
+    /* 容器改為單欄，並取消固定高度 */
     .grid-container, .create-layout { 
         flex-direction: column; 
     }
@@ -440,7 +460,7 @@ textarea.form-control {
         width: 100%; 
     }
 
-    /* 2. 詳細頁 (Detail) 修正 */
+    /* 詳細頁 (Detail) 修正 */
     .detail-layout {
         flex-direction: column;
         height: auto !important;     /* 讓高度隨內容長高 */
@@ -475,7 +495,7 @@ textarea.form-control {
         flex: none; /* 禁止壓縮 */
     }
 
-    /* 4. 其他修正 */
+    /* 其他修正 */
     .card-grid {
         grid-template-columns: repeat(2, 1fr); /* 手機版並排兩張卡片 */
     }
