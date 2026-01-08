@@ -430,20 +430,69 @@ textarea.form-control {
     color: black;
 }
 
-/* RWD */
+/* --- RWD 響應式修正  --- */
 @media (max-width: 768px) {
-    .grid-container, .detail-layout, .create-container {
+    /* 1. 容器改為單欄，並取消固定高度 */
+    .grid-container, .create-layout { 
+        flex-direction: column; 
+    }
+    .left-half, .right-half { 
+        width: 100%; 
+    }
+
+    /* 2. 詳細頁 (Detail) 修正 */
+    .detail-layout {
+        flex-direction: column;
+        height: auto !important;     /* 讓高度隨內容長高 */
+        min-height: auto !important; /* 取消最小高度限制 */
+        overflow: visible !important; /* ★關鍵：防止內容被裁切隱藏 */
+    }
+
+    .detail-image {
+        width: 100%;
+        min-height: 300px; /* 給圖片區一個基本高度 */
+        flex: none;       /* 禁止壓縮 */
+    }
+
+    .detail-info {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px;
+        flex: none;       /* 禁止壓縮 */
+        height: auto !important; /* 讓資訊區依內容長高 */
+        max-height: 400px; /* 避免資訊太長，設個上限 */
+    }
+
+    /* ★ 3. 留言區修正：強制顯示並設定高度 ★ */
+    .detail-comments {
+        width: 100%;
+        border-left: none;
+        height: 500px !important; /* ★強制設定高度，確保不會消失 */
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-color); /* 確保背景色，避免混淆 */
+        flex: none; /* 禁止壓縮 */
+    }
+
+    /* 4. 其他修正 */
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr); /* 手機版並排兩張卡片 */
+    }
+    
+    .profile-layout {
         flex-direction: column;
     }
-    .detail-image, .detail-info, .detail-comments {
-        flex: none;
+    .profile-intro {
         width: 100%;
+        margin: 0 0 20px 0;
     }
-    .detail-info {
-        border-right: none;
-        border-bottom: 1px solid #eee;
+    
+    .upload-box {
+        height: 200px;
     }
 }
+
 
 /* 頁籤容器 */
 .tab-container {
